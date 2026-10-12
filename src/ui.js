@@ -55,3 +55,4 @@ function renderTotal(state) {
   const totalEl = document.getElementById('total-amount');
   const total = calculateTotal(state.expenses, state.rates, state.homeCurrency);
   totalEl.textContent = `${total.toFixed(2)} ${state.homeCurrency}`;
+}  
