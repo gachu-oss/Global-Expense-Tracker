@@ -20,70 +20,74 @@
                 </select>
             </div>
         </header>
-        
-    <div id="status-message" class="status-message hidden" ></div>
-    
-    <main>
-        <section class="card">
-            <h2>Add Expense</h2>
-            <form id="expense-form">
-            <div class="form-group">
-                <label for="description">Description</label>
-                <input type="text" id="description" placeholder="e.g., meals, Shopping transport" required>
-            </div> 
-            
-            <div class="form-group-row">
-                <div class="form-group">
-                    <label for="amount">Amount</label>
-                    <input type="number" id="amount" placeholder="e.g., 50.00" step="0.01" required>
+
+        <div id="status-message" class="status-message hidden"></div>
+
+        <main>
+            <section class="card">
+                <h2>Add Expense</h2>
+                <form id="expense-form">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" id="description" placeholder="e.g., meals, shopping" required>
+                    </div>
+
+                    <div class="form-group-row">
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input type="number" id="amount" placeholder="e.g., 50.00" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="currency-select">Currency</label>
+                            <select id="currency-select" required>
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="GBP">GBP</option>
+                                <option value="KES">KES</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="category">Category</label>
+                        <select id="category">
+                            <option value="Food">Food</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <button type="submit">Add Expense</button>
+                </form>
+            </section>
+
+            <section class="card">
+                <h2>Summary</h2>
+
+                <div class="total-box">
+                    <span>Total Spent:</span>
+                    <strong id="total-amount">0.00 USD</strong>
                 </div>
-                <div class="form-group">
-                    <label for="currency">Currency</label>
-                    <select id="currency-select" required>
-                        <option value="USD">USD</option>
-                        <option value="EUR">EUR</option>
-                        <option value="GBP">GBP</option>
-                        <option value="KES">KES</option>
+
+                <div class="input-group">
+                    <label for="filter-category">Filter by Category</label>
+                    <select id="filter-category">
+                        <option value="">All Categories</option>
+                        <option value="Food">Food</option>
+                        <option value="Transport">Transport</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
-            </div>
-            
-            <div class="input-group">
-              <label for="category">Category</label>
-              <select id="category">
-                <option value="Food">Food</option>
-                <option value="Transport">Transport</option>
-                <option value="Shopping">Shopping</option>
-                <option value="Entertainment">Entertainment</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
 
-            <button type="submit">Add Expense</button>
-            </form>
-            </div>
+                <ul id="expense-list" class="expense-list"></ul>
+            </section>
+        </main>
+    </div>
 
-            <div class="card">
-              <h2>Summary</h2>
-  
-              <div class="total-box">
-                <span>Total Spent:</span>
-                <strong id="total-amount">0.00 USD</strong>
-            </div>
-
-            <div class="input-group">
-                <label for="filter-category">Filter by Category</label>
-                <select id="filter-category">
-                    <option value="">All Categories</option>
-                    <option value="Food">Food</option>
-                    <option value="Transport">Transport</option>
-                    <option value="Shopping">Shopping</option>
-                    <option value="Entertainment">Entertainment</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-        </section>
-    </main>
     <script type="module" src="src/main.js"></script>
 </body>
 </html>

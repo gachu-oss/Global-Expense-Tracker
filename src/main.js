@@ -27,12 +27,20 @@ async function loadRates() {
     render(state, handleRemove);
   }
 }
+
 function handleAdd(e) {
   e.preventDefault();
-  const description = document.getElementById('description').value;
-  const amount = parseFloat(document.getElementById('amount').value);
-  const currency = document.getElementById('currency').value;
+
+  const description = document.getElementById('description').value.trim();
+  const amount = Number.parseFloat(document.getElementById('amount').value);
+  const currency = document.getElementById('currency-select').value;
   const category = document.getElementById('category').value;
+
+  if (!description || Number.isNaN(amount) || amount <= 0) {
+    setError('Please enter a valid description and amount.');
+    render(getState(), handleRemove);
+    return;
+  }
 
   const newExpense = {
     id: Date.now().toString(),
@@ -44,6 +52,7 @@ function handleAdd(e) {
 
   addExpense(newExpense);
   document.getElementById('expense-form').reset();
+  setError(null);
   render(getState(), handleRemove);
 }
 
@@ -63,9 +72,17 @@ function handleFilterChange(e) {
 }
 
 function init() {
-  document.getElementById('expense-form').addEventListener('submit', handleAdd);
-  document.getElementById('home-currency').addEventListener('change', handleHomeCurrencyChange);
-  document.getElementById('filter-category').addEventListener('change', handleFilterChange);
+  const expenseForm = document.getElementById('expense-form');
+  const homeCurrencySelect = document.getElementById('currency');
+  const filterCategorySelect = document.getElementById('filter-category');
+
+  if (!expenseForm || !homeCurrencySelect || !filterCategorySelect) {
+    return;
+  }
+
+  expenseForm.addEventListener('submit', handleAdd);
+  homeCurrencySelect.addEventListener('change', handleHomeCurrencyChange);
+  filterCategorySelect.addEventListener('change', handleFilterChange);
 
   loadRates();
 }

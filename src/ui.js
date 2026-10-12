@@ -1,4 +1,4 @@
-import { convertCurrency,calculateTotal,filterExpensesByCategory } from './utils';
+import { convertCurrency, calculateTotal, filterExpensesByCategory } from './utils.js';
 
 export function render(state, onRemove) {
   renderStatus(state);
@@ -8,6 +8,8 @@ export function render(state, onRemove) {
 
 function renderStatus(state) {
   const statusEl = document.getElementById('status-message');
+  if (!statusEl) return;
+
   if (state.loading) {
     statusEl.textContent = 'Fetching latest exchange rates...';
     statusEl.className = 'status-message loading';
@@ -17,8 +19,12 @@ function renderStatus(state) {
   } else {
     statusEl.className = 'status-message hidden';
   }
-}function renderExpenses(state, onRemove) {
+}
+
+function renderExpenses(state, onRemove) {
   const listEl = document.getElementById('expense-list');
+  if (!listEl) return;
+
   listEl.innerHTML = '';
 
   const filtered = filterExpensesByCategory(state.expenses, state.selectedCategory);
@@ -53,6 +59,8 @@ function renderStatus(state) {
 
 function renderTotal(state) {
   const totalEl = document.getElementById('total-amount');
+  if (!totalEl) return;
+
   const total = calculateTotal(state.expenses, state.rates, state.homeCurrency);
   totalEl.textContent = `${total.toFixed(2)} ${state.homeCurrency}`;
-}  
+}
