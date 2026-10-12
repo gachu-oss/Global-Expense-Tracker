@@ -17,4 +17,41 @@ function renderStatus(state) {
   } else {
     statusEl.className = 'status-message hidden';
   }
+}function renderExpenses(state, onRemove) {
+  const listEl = document.getElementById('expense-list');
+  listEl.innerHTML = '';
+
+  const filtered = filterExpensesByCategory(state.expenses, state.selectedCategory);
+
+  filtered.forEach(expense => {
+    const li = document.createElement('li');
+    li.className = 'expense-item';
+
+    const fromRate = state.rates[expense.currency] || 1;
+    const toRate = state.rates[state.homeCurrency] || 1;
+    const converted = convertCurrency(expense.amount, fromRate, toRate);
+
+    li.innerHTML = `
+      <div class="expense-info">
+        <h3>${expense.description}</h3>
+        <p>${expense.category}</p>
+      </div>
+      <div class="expense-amount">
+        <div class="converted-val">${converted.toFixed(2)} ${state.homeCurrency}</div>
+        <div class="original-val">(${expense.amount.toFixed(2)} ${expense.currency})</div>
+      </div>
+      <button class="delete-btn" data-id="${expense.id}">Delete</button>
+    `;
+
+    li.querySelector('.delete-btn').addEventListener('click', () => {
+      onRemove(expense.id);
+    });
+
+    listEl.appendChild(li);
+  });
 }
+
+function renderTotal(state) {
+  const totalEl = document.getElementById('total-amount');
+  const total = calculateTotal(state.expenses, state.rates, state.homeCurrency);
+  totalEl.textContent = `${total.toFixed(2)} ${state.homeCurrency}`;
