@@ -1,12 +1,12 @@
 export function convertCurrency(amount,fromRate,toRate) {
-    if (!fromRete || !toRate || fromRate <= 0 || toRate <= 0) {
+    if (!fromRate || !toRate || fromRate <= 0 || toRate <= 0) {
         return 0;
     }
     return (amount / fromRate) * toRate;
 }
 
 export function calculateTotal(expenses, rates, homeCurrency) {
-    if (!expenses || expences.lenth === 0 || !rates) {
+    if (!expenses || expenses.length === 0 || !rates) {
         return 0; 
     }
     return expenses.reduce((total, expense) => {
