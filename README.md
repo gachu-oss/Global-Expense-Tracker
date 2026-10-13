@@ -70,5 +70,5 @@ The test suite covers currency conversion, total calculation, and category filte
 
 ## License
 
-This project is licensed under the ISC license, as defined in `package.json`.
+This project is licensed under the ISC license, as defined in `package.json`. 
 
